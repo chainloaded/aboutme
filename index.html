@@ -36,6 +36,7 @@
             height: 100vh;
             overflow: hidden;
             /* Hide scroll on desktop */
+            padding-bottom: 40px; /* Make room for the bottom audio bar */
         }
 
         /* Scanline Effect */
@@ -78,7 +79,7 @@
         .window:hover {
             transform: translate(-1px, -1px);
             box-shadow: 8px 8px 0px rgba(60, 60, 60, 0.9);
-            z-index: 10;
+            z-index: 10 !important; /* Bring hovered window to very front */
         }
 
         /* Title Bar */
@@ -184,8 +185,8 @@
 
         /* SOCIALS */
         #win-socials {
-            bottom: 20%;
-            right: 15%;
+            bottom: 35%;
+            right: 20%;
             width: 280px;
             z-index: 3;
         }
@@ -205,75 +206,10 @@
             margin-right: 10px;
         }
 
-        /* MUSIC / MISC */
-        #win-music {
-            bottom: 10%;
-            left: 43%;
-            width: 370px;
-            z-index: 4;
-        }
-
-        .music-player {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            border: 1px dotted #444;
-            padding: 5px;
-        }
-
-        .album-art {
-            width: 50px;
-            height: 50px;
-            background: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .track-info {
-            font-size: 1rem;
-            line-height: 1.1;
-        }
-
-        .track-title {
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .track-artist {
-            color: #888;
-        }
-
-        /* --- 4. MOBILE RESPONSIVE --- */
-        @media (max-width: 768px) {
-            body {
-                overflow-y: scroll;
-                height: auto;
-                padding-bottom: 50px;
-            }
-
-            .window {
-                position: relative;
-                width: 90% !important;
-                margin: 20px auto;
-                top: auto !important;
-                left: auto !important;
-                right: auto !important;
-                bottom: auto !important;
-            }
-
-            .bio-layout {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-        }
-
         /* INFO WINDOW */
         #win-info {
             top: 55%;
-            left: 15%;
+            left: 17%;
             width: 300px;
             z-index: 2;
         }
@@ -300,7 +236,7 @@
 
         /* TOOLS WINDOW */
         #win-tools {
-            top: 20%;
+            top: 15%;
             left: 15%;
             width: 220px;
             z-index: 1;
@@ -318,8 +254,146 @@
             color: #ccc;
         }
 
-        .tool-list li::before {
-            content: "";
+        /* ANIME WINDOW */
+        #win-anime {
+            bottom: 25%;
+            left: 36%;
+            width: 270px;
+            z-index: 4;
+        }
+
+        /* HORROR GAMES WINDOW */
+        #win-horror {
+            bottom: 12%;
+            left: 54%;
+            width: 260px;
+            z-index: 5;
+        }
+
+        /* --- 4. AUDIO TASKBAR --- */
+        .audio-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 35px;
+            background-color: var(--win-bg);
+            border-top: 2px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 100;
+            font-size: 1.2rem;
+        }
+
+        .now-playing {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+        }
+
+        .pulse {
+            color: #0f0;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .audio-controls button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.1s;
+        }
+
+        .audio-controls button:hover {
+            color: #0f0;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+
+        /* --- 5. RESPONSIVE DESIGN --- */
+        @media (max-width: 1400px) and (min-width: 769px) {
+            #win-bio { 
+                width: 420px; 
+                left: 30%; 
+                top: 8%; 
+            }
+            .pfp { 
+                width: 140px; 
+                height: 140px; 
+            }
+            #win-skills { 
+                right: 5%; 
+                top: 8%;
+                width: 220px; 
+            }
+            #win-info { 
+                left: 5%; 
+                width: 260px; 
+                top: 50%;
+            }
+            #win-tools { 
+                left: 5%; 
+                top: 12%;
+                width: 200px; 
+            }
+            #win-socials { 
+                right: 5%; 
+                width: 240px; 
+                bottom: 40%;
+            }
+            #win-anime { 
+                left: 32%; 
+                bottom: 22%; 
+                width: 220px; 
+            }
+            #win-horror { 
+                left: 52%; 
+                bottom: 12%; 
+                width: 240px; 
+            }
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            body {
+                overflow-y: auto;
+                height: auto;
+                padding-bottom: 70px; /* Extra room for mobile scroll + taskbar */
+            }
+
+            .window {
+                position: relative;
+                width: 90% !important;
+                margin: 20px auto;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+            }
+
+            .bio-layout {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .now-playing span.track-name {
+                display: none; /* Hide track name on small screens to save space */
+            }
         }
     </style>
 </head>
@@ -433,7 +507,6 @@
         </div>
     </div>
 
-
     <div class="window" id="win-socials">
         <div class="title-bar">
             <span>connect.ps1</span>
@@ -453,30 +526,87 @@
         </div>
     </div>
 
-    <div class="window" id="win-music">
+    <div class="window" id="win-anime">
         <div class="title-bar">
-            <span>winamp_v1.0</span>
+            <span>anime.txt</span>
             <div class="controls">
                 <div class="btn">_</div>
                 <div class="btn">X</div>
             </div>
         </div>
         <div class="content">
-            <p style="margin-top:0; color:#888; font-size:0.9rem;">NOW PLAYING:</p>
-            <div class="music-player">
-                <div class="album-art">♪</div>
-                <div class="track-info">
-                    <div class="track-title">𝙎𝙀𝙉𝙏𝙀 𝙈𝘼𝙄𝙎 (𝙎𝙪𝙥𝙚𝙧 𝙎𝙡𝙤𝙬𝙚𝙙)</div>
-                    <div class="track-artist">𝙀𝙩𝙚𝙧𝙣𝙭𝙡𝙠𝙯</div>
-                </div>
-            </div>
-            <div style="margin-top:10px; font-size: 0.8rem;">
-                <span style="cursor:pointer">[PREV]</span>
-                <span style="cursor:pointer">[PLAY]</span>
-                <span style="cursor:pointer">[NEXT]</span>
-            </div>
+            <ul class="tool-list">
+                <li>> Fate/stay night: Heaven's feel</li>
+                <li>> Fate/Zero</li>
+                <li>> Serial Experiments Lain</li>
+                <li>> Call Of The Night</li>
+            </ul>
         </div>
     </div>
+
+    <div class="window" id="win-horror">
+        <div class="title-bar">
+            <span>horror_games.exe</span>
+            <div class="controls">
+                <div class="btn">_</div>
+                <div class="btn">X</div>
+            </div>
+        </div>
+        <div class="content">
+            <ul class="tool-list">
+                <li>> Cry Of Fear</li>
+                <li>> Amnesia: The Dark Descent</li>
+                <li>> Mouthwashing</li>
+                <li>> SOMA</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="audio-bar">
+        <audio id="bg-music" loop>
+            <source src="song.mp3" type="audio/mpeg">
+        </audio>
+        
+        <div class="now-playing">
+            <span class="pulse">▶</span> 
+            <span class="track-name">Every Phase of You · Hiroyuki Sawano (Fate/strange Fake Original Soundtrack)</span>
+        </div>
+        
+        <div class="audio-controls">
+            <button id="play-btn">[ PLAY ]</button>
+            <button id="mute-btn">[ MUTE ]</button>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bg-music');
+        const playBtn = document.getElementById('play-btn');
+        const muteBtn = document.getElementById('mute-btn');
+
+        // Play / Pause Logic
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerText = '[ PAUSE ]';
+            } else {
+                audio.pause();
+                playBtn.innerText = '[ PLAY ]';
+            }
+        });
+
+        // Mute / Unmute Logic
+        muteBtn.addEventListener('click', () => {
+            audio.muted = !audio.muted;
+            muteBtn.innerText = audio.muted ? '[ UNMUTE ]' : '[ MUTE ]';
+            
+            // Dim the mute button when muted
+            if (audio.muted) {
+                muteBtn.style.color = '#888';
+            } else {
+                muteBtn.style.color = 'var(--accent)';
+            }
+        });
+    </script>
 
 </body>
 
